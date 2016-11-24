@@ -1,0 +1,60 @@
+body {
+  background: #368;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.main {
+  height: 600px;
+  width: 800px;
+}
+
+.display {
+  background: repeating-linear-gradient(
+    45deg,
+    #567,
+    #567 10px,
+    #576 10px,
+    #576 20px
+  );
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 50px;
+  margin: auto;
+  width: 50px;
+}
+
+.pixel {
+  cursor: crosshair;
+  display: block;
+}
+
+.pixel:hover {
+  opacity: .5;
+}
+
+.color-input {
+  font-family: monospace;
+  font-size: 16px;
+  height: 24px;
+  width: 128px;
+}
+
+.main {
+  margin-left: 180px;
+}
+
+.second {
+  background: #ddd;
+}
+
+.third {
+  background: #bbb;
+}
