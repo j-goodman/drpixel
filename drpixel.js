@@ -45,14 +45,37 @@ var loadPixels = function (width, height, unit) {
   }
 };
 
+var uploadImage = function (matrixString) {
+  var display = document.getElementById('display');
+  while (display.firstChild) {
+    display.removeChild(display.firstChild);
+  }
+  var matrix = eval(matrixString);
+  var width = matrix[0].length;
+  var height = matrix.length;
+  loadPixels(width, height, Math.round(600/height));
+  var pixels = display.childNodes;
+  for (y=0 ; y<height ; y++) {
+    for (x=0 ; x<width ; x++) {
+      display.childNodes[y * width + x].style.background = matrix[y][x];
+      display.childNodes[y * width + x].hexval = matrix[y][x];
+    }
+  }
+};
+
 window.onload = function () {
   var display = document.getElementById('display');
   var width = window.prompt('Image width?');
   var height = window.prompt('Image height?');
   var unitsize = Math.round(600/height);
   window.onkeydown = function (event) {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13) { // key: enter
       logAsMatrix(width, height);
+    } else if (event.keyCode === 73) { // key: i
+      var matrix = window.prompt("Paste your image matrix.");
+      if (matrix) {
+        uploadImage(matrix);
+      }
     }
   };
   display.style.width = unitsize*width+'px';
