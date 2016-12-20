@@ -54,20 +54,28 @@ var uploadImage = function () {
   while (display.firstChild) {
     display.removeChild(display.firstChild);
   }
-  var matrix = eval(matrixString);
-  var width = matrix[0].length;
-  var height = matrix.length;
-  var unitsize = Math.round(600/height);
-  display.style.width = unitsize*width+'px';
-  display.style.height = unitsize*height+'px';
-  loadPixels(width, height, unitsize);
+  var jsMatrix = eval(matrixString);
+  var matrixWidth = jsMatrix[0].length;
+  var matrixHeight = jsMatrix.length;
+  var unitsize = Math.round(600/matrixHeight);
+  display.style.width = unitsize*matrixWidth+'px';
+  display.style.height = unitsize*matrixHeight+'px';
+  loadPixels(matrixWidth, matrixHeight, unitsize);
   var pixels = display.childNodes;
-  for (y=0 ; y<height ; y++) {
-    for (x=0 ; x<width ; x++) {
-      display.childNodes[y * width + x].style.background = matrix[y][x];
-      display.childNodes[y * width + x].hexval = matrix[y][x];
+  for (y=0 ; y<matrixHeight ; y++) {
+    for (x=0 ; x<matrixWidth ; x++) {
+      display.childNodes[y * matrixWidth + x].style.background = jsMatrix[y][x];
+      display.childNodes[y * matrixWidth + x].hexval = jsMatrix[y][x];
     }
   }
+  window.onkeydown = function (event) {
+    if (event.keyCode === 13) { // key: enter
+      logAsMatrix(matrixWidth, matrixHeight);
+    } else if (event.keyCode === 73) { // key: i
+      uploadImage();
+    }
+  };
+
 };
 
 window.onload = function () {
